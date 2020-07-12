@@ -28,6 +28,7 @@ class Feed extends Component {
       }
     })
       .then(res => {
+        console.log(res);
         if (res.status !== 200) {
           throw new Error('Failed to fetch user status.');
         }
@@ -70,7 +71,8 @@ class Feed extends Component {
           posts: resData.posts.map(post => {
             return {
               ...post,
-              imagePath: post.imageUrl
+              imagePath: post.imageUrl,
+              publicId: post.imagePublicId
             };
           }),
           totalPosts: resData.totalItems,
@@ -152,7 +154,6 @@ class Feed extends Component {
         return res.json();
       })
       .then(resData => {
-        console.log(resData);
         const post = {
           _id: resData.post._id,
           title: resData.post.title,
@@ -276,16 +277,17 @@ class Feed extends Component {
             >
               {this.state.posts.map(post => (
                 <Post
-                  key={post._id}
-                  id={post._id}
-                  author={post.creator.name}
-                  date={new Date(post.createdAt).toLocaleDateString('en-US')}
-                  title={post.title}
-                  image={post.imageUrl}
-                  content={post.content}
-                  onStartEdit={this.startEditPostHandler.bind(this, post._id)}
-                  onDelete={this.deletePostHandler.bind(this, post._id)}
-                />
+                key={post._id}
+                id={post._id}
+                author={post.creator.name}
+                date={new Date(post.createdAt).toLocaleDateString('en-US')}
+                title={post.title}
+                image={post.imageUrl}
+                content={post.content}
+                publicId={post.publicId}
+                onStartEdit={this.startEditPostHandler.bind(this, post._id)}
+                onDelete={this.deletePostHandler.bind(this, post._id)}
+              />
               ))}
             </Paginator>
           )}

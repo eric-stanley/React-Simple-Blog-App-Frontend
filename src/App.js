@@ -25,6 +25,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+
     const token = localStorage.getItem('token');
     const expiryDate = localStorage.getItem('expiryDate');
     if (!token || !expiryDate) {
@@ -80,7 +81,6 @@ class App extends Component {
         return res.json();
       })
       .then(resData => {
-        console.log(resData);
         this.setState({
           isAuth: true,
           token: resData.token,

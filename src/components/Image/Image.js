@@ -5,6 +5,7 @@ import './Image.css';
 const image = props => (
   <div
     className="image"
+    id={props.publicId}
     style={{
       backgroundImage: `url('${props.imageUrl}')`,
       backgroundSize: props.contain ? 'contain' : 'cover',

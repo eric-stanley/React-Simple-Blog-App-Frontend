@@ -29,9 +29,10 @@ class SinglePost extends Component {
         this.setState({
           title: resData.post.title,
           author: resData.post.creator.name,
-          image: process.env.REACT_APP_API_URL + '/' + resData.post.imageUrl,
+          image: resData.post.imageUrl,
           date: new Date(resData.post.createdAt).toLocaleDateString('en-US'),
-          content: resData.post.content
+          content: resData.post.content,
+          publicId: resData.post.imagePublicId
         });
       })
       .catch(err => {
@@ -47,7 +48,7 @@ class SinglePost extends Component {
           Created by {this.state.author} on {this.state.date}
         </h2>
         <div className="single-post__image">
-          <Image contain imageUrl={this.state.image} />
+          <Image contain imageUrl={this.state.image} publicId={this.state.publicId} />
         </div>
         <p>{this.state.content}</p>
       </section>

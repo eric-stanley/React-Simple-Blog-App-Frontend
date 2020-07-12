@@ -7,6 +7,7 @@
   cursor: pointer;
   text-transform: uppercase;
   text-decoration: none;
+  margin: 2rem;
 }
 
 .button:focus {
